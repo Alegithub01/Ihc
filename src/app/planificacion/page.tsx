@@ -30,6 +30,8 @@ import CloseIcon from '@mui/icons-material/Close'
 import { jsPDF } from 'jspdf'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 import { careers, courses, timeSlots, days } from '@/data/mock-data'
 import { Group, ScheduleCell, Course } from '@/types/scheduler'
@@ -189,6 +191,15 @@ export default function SchedulePlanner() {
           <Typography variant="h4" component="h1" gutterBottom>
             Planificación de Horarios
           </Typography>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: '16px' }} >
+            <Link underline="hover" color="white" href="/">
+              Inicio  /
+            </Link>
+            <Link underline="hover" color="white" href="/carreras">
+              Carreras  /
+            </Link>
+            <Typography color="white">Semestre 1</Typography>
+          </Breadcrumbs>
           <Box sx={{ mb: 2 }}>
             <Autocomplete
               freeSolo
@@ -202,7 +213,7 @@ export default function SchedulePlanner() {
                   sx={{
                     border: '2px solid #f59e0b', 
                     borderRadius: '8px',         
-                    // backgroundColor: '#fff',    
+                    backgroundColor: '#fff',    
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
                         borderColor: '#f59e0b', 
@@ -212,6 +223,12 @@ export default function SchedulePlanner() {
                       },
                       '&.Mui-focused fieldset': {
                         borderColor: '#d97706', 
+                      },
+                      '& .MuiInputLabel-root': {
+                        color: '#f59e0b', // Color amarillo
+                      },
+                      '& .MuiInputLabel-root.Mui-focused': {
+                        color: '#f59e0b', // Color amarillo más oscuro cuando está enfocado
                       },
                     },
                   }}
