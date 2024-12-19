@@ -28,6 +28,8 @@ import SaveIcon from '@mui/icons-material/Save'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import CloseIcon from '@mui/icons-material/Close'
 import { jsPDF } from 'jspdf'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import { careers, courses, timeSlots, days } from '@/data/mock-data'
 import { Group, ScheduleCell, Course } from '@/types/scheduler'
@@ -49,11 +51,24 @@ export default function SchedulePlanner() {
   const [schedule, setSchedule] = useState<Record<string, Record<string, ScheduleCell>>>({})
   const [currentSemester, setCurrentSemester] = useState('1')
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' as 'error' | 'info' })
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
 
   const handleCareerChange = (event: SelectChangeEvent<string>) => {
     setSelectedCareer(event.target.value)
     setSchedule({})
   }
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = courses.filter((course) => 
+      course.name.toLowerCase().includes(term) || 
+      course.careerId.toLowerCase().includes(term)
+    );
+
+    setFilteredCourses(filtered);
+  };
 
   const checkScheduleConflict = (newSchedule: Group['schedule']) => {
     for (const slot of newSchedule) {
@@ -174,6 +189,73 @@ export default function SchedulePlanner() {
           <Typography variant="h4" component="h1" gutterBottom>
             Planificación de Horarios
           </Typography>
+          <Box sx={{ mb: 2 }}>
+            <Autocomplete
+              freeSolo
+              options={filteredCourses.map((course) => course.name)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Buscar Materias o Carreras"
+                  variant="outlined"
+                  onChange={handleSearchChange}
+                  sx={{
+                    border: '2px solid #f59e0b', 
+                    borderRadius: '8px',         
+                    // backgroundColor: '#fff',    
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#f59e0b', 
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#d97706', 
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#d97706', 
+                      },
+                    },
+                  }}
+                />
+              )}
+            />
+          </Box>
+          {/* Lista de Materias Filtradas */}
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Card sx={{ width: 300 }}>
+              <CardContent>
+                {filteredCourses.map((course) => (
+                  <Box key={course.id} sx={{ mb: 2 }}>
+                    <Typography variant="subtitle1">{course.name}</Typography>
+                    {course.groups.map((group) => (
+                      <Button
+                        key={group.id}
+                        variant="outlined"
+                        fullWidth
+                        sx={{
+                          mt: 1,
+                          justifyContent: 'flex-start',
+                          backgroundColor: course.color,
+                          '&:hover': {
+                            backgroundColor: course.color,
+                            filter: 'brightness(90%)',
+                          },
+                        }}
+                        onClick={() => handleGroupSelect(course, group)}
+                      >
+                        <Box sx={{ textAlign: 'left' }}>
+                          <Typography variant="body2">Grupo {group.number}</Typography>
+                          <Typography variant="caption" sx={{ display: 'block' }}>
+                            {group.teacher}
+                          </Typography>
+                        </Box>
+                      </Button>
+                    ))}
+                  </Box>
+                ))}
+              </CardContent>
+            </Card>
+          </Box>
+
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
             <Button startIcon={<SaveIcon />} variant="outlined" sx={{ mr: 1 }}>
               Guardar borrador
