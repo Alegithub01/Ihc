@@ -35,6 +35,8 @@ import Link from '@mui/material/Link';
 
 import { careers, courses, timeSlots, days } from '@/data/mock-data'
 import { Group, ScheduleCell, Course } from '@/types/scheduler'
+import { scheduleService } from '@/shared/services/scheduleService';
+
 
 const theme = createTheme({
   palette: {
@@ -183,6 +185,16 @@ export default function SchedulePlanner() {
     doc.save('horario.pdf')
   }
 
+  const handleSaveSchedule = () => {
+    scheduleService.saveSchedule(schedule);
+    setSnackbar({
+      open: true,
+      message: 'Horario guardado exitosamente.',
+      severity: 'info',
+    });
+  };
+  
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -274,7 +286,7 @@ export default function SchedulePlanner() {
           </Box>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-            <Button startIcon={<SaveIcon />} variant="outlined" sx={{ mr: 1 }}>
+            <Button startIcon={<SaveIcon />} variant="outlined" sx={{ mr: 1 }} onClick={handleSaveSchedule}>
               Guardar borrador
             </Button>
             <Button
@@ -284,6 +296,31 @@ export default function SchedulePlanner() {
             >
               Exportar PDF
             </Button>
+            
+            <Button
+            startIcon={<FileDownloadIcon />}
+            variant="outlined"
+            onClick={() => {
+              const savedSchedules = scheduleService.loadSchedules();
+              if (savedSchedules.length > 0) {
+                setSchedule(savedSchedules[0]); // Cargar el primero como ejemplo
+                setSnackbar({
+                  open: true,
+                  message: 'Horario cargado correctamente.',
+                  severity: 'info',
+                });
+              } else {
+                setSnackbar({
+                  open: true,
+                  message: 'No hay horarios guardados.',
+                  severity: 'info',
+                });
+              }
+            }}
+          >
+            Cargar Ultimo Horario
+          </Button>
+
           </Box>
           <Box sx={{ display: 'flex', gap: 2 }}>
             <Card sx={{ width: 300 }}>
