@@ -204,7 +204,7 @@ export default function SchedulePlanner() {
             Planificación de Horarios
           </Typography>
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: '16px' }} >
-            <Link underline="hover" color="white" href="/">
+            <Link underline="hover" color="black" href="/home">
               Inicio  /
             </Link>
             <Link underline="hover" color="white" href="/carreras">

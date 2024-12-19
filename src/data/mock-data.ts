@@ -39,8 +39,8 @@ export const courses: Course[] = [
         number: '6',
         teacher: 'SILVA RAMOS HERNAN VICTOR',
         schedule: [
-          { day: 'Lunes', startTime: '15:00', endTime: '16:30', classroom: 'B201' },
-          { day: 'Miércoles', startTime: '15:00', endTime: '16:30', classroom: 'B201' },
+          { day: 'Lunes', startTime: '06:45', endTime: '08:15', classroom: 'B201' },
+          { day: 'Miércoles', startTime: '15:45', endTime: '17:15', classroom: 'B201' },
         ],
       },
     ],
@@ -67,7 +67,7 @@ export const courses: Course[] = [
     id: 'PROG1',
     name: 'PROGRAMACIÓN I',
     careerId: 'INF',
-    semester: 1,
+    semester: 2,
     color: courseColors[2],
     groups: [
       {
@@ -75,8 +75,99 @@ export const courses: Course[] = [
         number: '1',
         teacher: 'RODRIGUEZ PEREZ ANA',
         schedule: [
-          { day: 'Lunes', startTime: '10:15', endTime: '11:45', classroom: 'LAB1' },
-          { day: 'Miércoles', startTime: '10:15', endTime: '11:45', classroom: 'LAB1' },
+          { day: 'Lunes', startTime: '09:45', endTime: '11:15', classroom: 'LAB1' },
+          { day: 'Miércoles', startTime: '11:15', endTime: '12:45', classroom: 'LAB1' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'SOFT1',
+    name: 'INGENIERIA DE SOTFWARE',
+    careerId: 'INF',
+    semester: 6,
+    color: courseColors[2],
+    groups: [
+      {
+        id: 'G1',
+        number: '1',
+        teacher: 'ROSEMARY BASCOPE TORRICO',
+        schedule: [
+          { day: 'Lunes', startTime: '09:45', endTime: '11:15', classroom: 'LAB1' },
+          { day: 'Miércoles', startTime: '11:15', endTime: '12:45', classroom: 'LAB1' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ALGO',
+    name: 'ALGORITMOS AVANZADOS',
+    careerId: 'INF',
+    semester: 4,
+    color: courseColors[2],
+    groups: [
+      {
+        id: 'G5',
+        number: '1',
+        teacher: 'MARIA LETICIA BLANCO',
+        schedule: [
+          { day: 'Martes', startTime: '06:45', endTime: '08:15', classroom: 'LAB1' },
+          { day: 'Miércoles', startTime: '06:45', endTime: '08:15', classroom: 'LAB1' },
+          { day: 'Jueves', startTime: '06:45', endTime: '08:15', classroom: 'LAB1' }
+        ],
+      },
+    ],
+  },
+  {
+    id: 'IHC',
+    name: 'INTERACCION HUMANO COMPUTADOR',
+    careerId: 'INF',
+    semester: 7,
+    color: courseColors[2],
+    groups: [
+      {
+        id: 'G1',
+        number: '1',
+        teacher: 'CORINA FLORES VILLARROEL',
+        schedule: [
+          { day: 'Martes', startTime: '06:45', endTime: '08:15', classroom: '690C' },
+          { day: 'Jueves', startTime: '18:45', endTime: '20:15', classroom: '690B' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'SGR',
+    name: 'SEGURIDA DE SISTEMAS',
+    careerId: 'INF',
+    semester: 7,
+    color: courseColors[2],
+    groups: [
+      {
+        id: 'G1',
+        number: '1',
+        teacher: 'MARCELO ANTEZANA CAMACHO',
+        schedule: [
+          { day: 'Lunes', startTime: '09:45', endTime: '11:15', classroom: 'LAB1' },
+          { day: 'Miércoles', startTime: '11:15', endTime: '12:45', classroom: 'LAB1' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ROBO',
+    name: 'ROBOTICA',
+    careerId: 'INF',
+    semester: 7,
+    color: courseColors[2],
+    groups: [
+      {
+        id: 'G1',
+        number: '1',
+        teacher: 'CARMEN ROSA GARCIA',
+        schedule: [
+          { day: 'Lunes', startTime: '09:45', endTime: '11:15', classroom: 'LAB1' },
+          { day: 'Miércoles', startTime: '11:15', endTime: '12:45', classroom: 'LAB1' },
         ],
       },
     ],
